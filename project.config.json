@@ -12,8 +12,8 @@
 		"autoAudits": false
 	},
 	"compileType": "miniprogram",
-	"libVersion": "2.6.5",
-	"appid": "wxcf21c0d239a87934",
+	"libVersion": "2.6.6",
+	"appid": "wxa7932b3ba0473289",
 	"projectname": "realmarket",
 	"debugOptions": {
 		"hidedInDevtools": []
@@ -28,13 +28,24 @@
 			"current": -1,
 			"list": []
 		},
+		"plugin": {
+			"current": -1,
+			"list": []
+		},
 		"game": {
 			"currentL": -1,
 			"list": []
 		},
 		"miniprogram": {
-			"current": -1,
-			"list": []
+			"current": 0,
+			"list": [
+				{
+					"id": -1,
+					"name": "分类页面",
+					"pathName": "pages/divide/divide",
+					"scene": null
+				}
+			]
 		}
 	}
 }
