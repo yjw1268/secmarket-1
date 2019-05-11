@@ -20,7 +20,7 @@
 				</view>
 			</view>
 			<view class="order-total">
-				共{{item.buyNums}}件商品 合计：<text class="total-price">￥{{item.totalPrice}}</text>（含运费￥{{item.feePrice}}）
+				共{{item.buyNums}}件商品 合计：<text class="total-price">￥{{item.totalPrice}}</text>（含运费￥0{{item.feePrice}}）
 			</view>
 		</view>
 	</block>

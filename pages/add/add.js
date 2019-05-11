@@ -12,7 +12,8 @@ Page({
       prgressColor:'#f44336',
       link:null,
       cred:null,
-      file:[]
+      file:[],
+      wordNum:0
   },
   chsImg() {
     let that = this;
@@ -148,6 +149,13 @@ Page({
           title: e.detail.value
         })
         break;
+         case "intro":
+         var len=parseInt(e.detail.value.length)
+        this.setData({
+          intro: e.detail.value,
+          wordNum:len
+        })
+        break;
       case "link":
         this.setData({
           link: e.detail.value
@@ -157,7 +165,7 @@ Page({
     this.checkUpload();
   },
   checkUpload() {
-    if (((this.data.group == 1 && this.data.file.length >= 2) || (this.data.group == 0 && this.data.file.length == 1)) && this.data.title) {
+    if (((this.data.group == 0 && this.data.file.length >= 1) || (this.data.group == 1 )) && this.data.title) {
       this.setData({
         allowUpload: true
       })

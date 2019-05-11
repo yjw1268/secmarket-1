@@ -2,7 +2,6 @@
 Page({
   data: {
     hasAuth: wx.canIUse('button.open-type.getUserInfo'),
-    //grids: [0, 1, 2, 3, 4, 5,],
     grids: [
         {
         url: "/pages/",

@@ -1,2 +1,31 @@
-<!--pages/detail/detail.wxml-->
-<text>pages/detail/detail.wxml</text>
+  <view class="nav_left">
+    <block wx:for="{{navLeftItems}}">
+      <view class="nav_left_items {{curNav == item.id ? 'active' : ' '}}" bindtap="switchRightTab" data-id="{{item.id}}">{{item.name}}</view>
+    </block>
+  </view>
+  <view class="nav_right">
+    <!--如果有数据，才遍历项-->
+    <view wx:if="{{navRightItems[curNav]}}">
+      <block wx:for="{{navRightItems}}" wx:for-item="item">
+        <view class="nav_right_items">
+          <navigator url="../../detail/detail?CId={{item.CId}}">
+            <view>
+              <block wx:if="{{item.commodityImage}}">
+                <image src="{{item.commodityImage}}"></image>
+              </block>
+              <block wx:else>
+                <image src="../../resources/active1.png"></image>
+              </block>
+            </view>
+            <view wx:if="{{item.intro}}">
+              <text>{{item.intro}}</text>
+            </view>
+            <view wx:else>
+              <text>"暂无描述"</text>
+            </view>
+          </navigator>
+        </view>
+      </block>
+    </view>
+    <view wx:else>暂无数据</view>
+  </view>

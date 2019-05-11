@@ -1,6 +1,8 @@
 /* pages/add/add.wxss */
+@import "../../weui.wxss";
 .container{
-	background-color: #f3f3f3;
+  width:90%;
+margin-left:5%;
 }
 .imgWrap {
 	background-color: #f3f3f3;

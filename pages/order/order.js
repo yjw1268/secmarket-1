@@ -1,5 +1,6 @@
 var app = getApp();
 var util = require('../../utils/util.js');
+var wrapper=require('../../utils/wrapper.js')
 var order_detail = {
   "data": [
     {
@@ -8,7 +9,7 @@ var order_detail = {
         {
           "buyNum": 2,
           "goodsImg": "../../resources/active.png",
-          "goodsName": "列表商品",
+          "goodsName": "Idontnow",
           "goodsStandardDes": "颜色：红色  尺码：s",
           "sellPrice": 299,
           "shopId": 1,
@@ -25,7 +26,7 @@ var order_detail = {
         {
           "buyNum": 2,
           "goodsImg": "../../resources/active.png",
-          "goodsName": "列表商品",
+          "goodsName": "egg",
           "goodsStandardDes": "颜色：红色  尺码：s",
           "sellPrice": 299,
           "shopId": 1,
@@ -49,7 +50,25 @@ Page({
   onLoad: function () {
     this.setData({
       curNav: 0,
-    });
+    }); 
+    wrapper.request({
+      url: wrapper.WCONST.apiBase +"getOrder.php",
+      data: {
+        openid: wx.getStorageSync('openid'),
+      },
+      method: "GET",
+      header: {
+        "content-type": "application/x-www-form-urlencoded"
+      },
+      success: res => {
+        if (res.data) {
+          this.setData({
+         [order_detail.data]:res.data
+          })
+        }
+      }
+    })
+
   },
   onShow: function () {
     var self = this;

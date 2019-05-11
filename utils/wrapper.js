@@ -2,6 +2,9 @@
 const ERROR = {
 
 }
+const WCONST={
+apiBase:"https://www.bupt404.cn/secmarket/"
+}
 function toast(notice) {
   wx.showToast({
     title: notice ? notice : '未知错误',
@@ -128,5 +131,6 @@ function request(option) {
 }
 module.exports={
 uploadFormId: uploadFormId,
-    request: request
+    request: request,
+    WCONST:WCONST
 }
