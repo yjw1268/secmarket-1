@@ -1,6 +1,7 @@
 <!--index2.wxml-->
-<view wx:if="{{hasAuth}}">
+<view wx:if="{{hasAuth&&hasRegister}}">
   <view class="container">
+  
     <block wx:if="{{searchbar}}">
       <view class="page__bd">
         <view class="weui-search-bar">
@@ -43,18 +44,17 @@
         </view>
       </view>
     </block>
-    <swiper indicator-dots="{{indicatorDots}}" autoplay="{{autoplay}}" interval='{{interval}}' duration="{{duration}}">
-      <block wx:for="{{imgUrls}}" wx:for-item='item'>
-        <swiper-item>
-          <image src="{{item.url}}" mode="aspectFill" />
-        </swiper-item>
-      </block>
-    </swiper>
+    
+    <swiper class='swiperClass' autoplay indicator-color="#a39f99" indicator-active-color="#f49641" indicator-dots  interval="{{interval}}" duration="{{duration}}" previous-margin="30px" next-margin="30px" circular id="swiper" bindchange="bindinput" >
+    <block wx:for="{{imgUrls}}" wx:key="{{index}}">
+    <swiper-item>
+
+ <image src="{{item}}" class="slide-image {{swiperIndex == index ? 'active' : 'quiet'}}" mode='aspectFill'>
+ </image>
+ </swiper-item>
+ </block>
+ </swiper>
     <view class="page">
-      <view class="page__hd">
-        <view class="page__title"></view>
-        <view class="page__desc"></view>
-      </view>
       <view class="page__bd">
         <view class="weui-grids">
           <block wx:for="{{grids}}" wx:for-item="item">

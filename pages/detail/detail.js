@@ -12,6 +12,7 @@ Page({
       price: 233,
       place: "沙河校区"
     },
+    indicatorDots: true,
     autoplay:true,
     interval:1500,
     duration:700
