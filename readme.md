@@ -10,6 +10,15 @@
  data:{
     openid
   }
+  return:{
+    {
+      cNo
+      commodityName
+      intro
+      price
+      commodityImage
+    }，....
+  }
 
 ```
 ## getClassification   //获取分类的商品列表页面
@@ -21,6 +30,11 @@ data:{
   classification: //123456789
   index:   //分页
 
+ }
+ returndata:{
+  { cNo
+   commodityName
+   commodityImage},.....
  }
  //1书籍报刊 2化妆护肤 3衣物鞋子 4电子数码 5我要求购 6食品饮品
  //7文具用品 8游戏动漫 9乐器类 10体育用品 11珠宝首饰 12其他
@@ -51,8 +65,11 @@ url:apiBase+"getCommodityDetail.php"
 method:POST
 data:{
   openid
-  CId
+  cNo
 
+}
+return {
+  all
 }
 
 ```
@@ -84,7 +101,12 @@ method:POST
 data:{
   openid?
 }
+return{
+
+  all
+}
 ```
+
 ## register
 ```
 url:apiBase+"register.php'
@@ -93,6 +115,7 @@ data:{
   realName
   place
   intro
+  place
   schoolDepartment
   schoolId
   phone
