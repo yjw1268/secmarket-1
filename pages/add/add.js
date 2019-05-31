@@ -1,12 +1,13 @@
 // pages/add/add.js
 
-const CAMERA_SIZE_MIN = 1 * 1024;
+const CAMERA_SIZE_MIN = 0;
 const CAMERA_SIZE_MAX = 10*1024*1024;
 Page({
   data: {
       groupRange:['我要卖','我要买'],
       group:0,
       master:1,
+      title:"",
       allowUpload:false,
       uploading:false,
       prgressColor:'#f44336',
@@ -26,7 +27,7 @@ Page({
         let filePathTem = res.tempFilePaths[0];
         wx.getFileInfo({
           filePath: filePathTem,
-          digestAlgorithm: 'sha1',
+          digestAlgorithm: 'sha1',//sha1算法或md5算法
           success(res) {
             // console.log(res);
             let max = CAMERA_SIZE_MAX;
@@ -162,14 +163,16 @@ Page({
         })
 
     }
-    this.checkUpload();
+   this.checkUpload();
   },
   checkUpload() {
     if (((this.data.group == 0 && this.data.file.length >= 1) || (this.data.group == 1 )) && this.data.title) {
+      console.log("true");
       this.setData({
         allowUpload: true
       })
     } else {
+      console.log("false");
       this.setData({
         allowUpload: false
       })
@@ -243,47 +246,6 @@ Page({
    */
   onReady: function () {
 
-  },
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {
-
-  },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {
-
-  },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function () {
-
-  },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-
   }
+
 })

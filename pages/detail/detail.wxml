@@ -1,31 +1,21 @@
-  <view class="nav_left">
-    <block wx:for="{{navLeftItems}}">
-      <view class="nav_left_items {{curNav == item.id ? 'active' : ' '}}" bindtap="switchRightTab" data-id="{{item.id}}">{{item.name}}</view>
-    </block>
-  </view>
-  <view class="nav_right">
-    <!--如果有数据，才遍历项-->
-    <view wx:if="{{navRightItems[curNav]}}">
-      <block wx:for="{{navRightItems}}" wx:for-item="item">
-        <view class="nav_right_items">
-          <navigator url="../../detail/detail?CId={{item.CId}}">
-            <view>
-              <block wx:if="{{item.commodityImage}}">
-                <image src="{{item.commodityImage}}"></image>
-              </block>
-              <block wx:else>
-                <image src="../../resources/active1.png"></image>
-              </block>
-            </view>
-            <view wx:if="{{item.intro}}">
-              <text>{{item.intro}}</text>
-            </view>
-            <view wx:else>
-              <text>"暂无描述"</text>
-            </view>
-          </navigator>
-        </view>
-      </block>
+<view class="container">
+    <view>
+        <swiper class="swiper_box" indicator-dots="{{indicatorDots}}" vertical="{{vertical}}"
+                autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}">
+            <block wx:for="{{commodity.commodityImage}}" wx:for-item="item">
+                <swiper-item>
+                    <image src="{{item}}" class="slide-image"/>
+                </swiper-item>
+            </block>
+        </swiper>
     </view>
-    <view wx:else>暂无数据</view>
-  </view>
+    <view class="shopping_container">
+        <view class="title">{{commodity.commodityName}}</view>
+        <view class="reason">{{commodity.intro}}</view>
+    </view>
+
+    <view>
+        <view></view>
+    </view>
+
+</view>

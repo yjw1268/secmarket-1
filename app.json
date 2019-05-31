@@ -25,12 +25,12 @@
         "selectedIconPath": "resources/discoverIcon.png",
         "text": "首页"
       },
-        {
-          "pagePath": "pages/divide/divide",
-          "iconPath": "resources/discoverIcon2.png",
-          "selectedIconPath": "resources/discoverIcon.png",
-          "text": "分类"
-        },
+      {
+        "pagePath": "pages/divide/divide",
+        "iconPath": "resources/discoverIcon2.png",
+        "selectedIconPath": "resources/discoverIcon.png",
+        "text": "分类"
+      },
       {
         "pagePath": "pages/order/order",
         "iconPath": "resources/starIcon.png",
@@ -44,5 +44,6 @@
         "text": "个人"
       }
     ]
-  }
+  },
+  "sitemapLocation": "sitemap.json"
 }

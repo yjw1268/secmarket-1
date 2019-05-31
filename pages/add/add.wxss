@@ -34,6 +34,12 @@ margin-left:5%;
 	border-radius: 5rpx;
 	color: white;
 }
+.active{
+background-color: royalblue;
+}
+.negtive{
+background-color: grey;
+}
 .add {
   background-color: royalblue;
   font-size: 20px;

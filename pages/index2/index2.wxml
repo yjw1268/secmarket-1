@@ -1,102 +1,193 @@
 <!--index2.wxml-->
-<view wx:if ="{{hasAuth}}">
+<view wx:if="{{hasAuth}}">
   <view class="container">
     <block wx:if="{{searchbar}}">
       <view class="page__bd">
-            <view class="weui-search-bar">
-                <view class="weui-search-bar__form">
-                    <view class="weui-search-bar__box">
-                        <icon class="weui-icon-search_in-box" type="search" size="14"></icon>
-                        <input type="text" class="weui-search-bar__input" placeholder="搜索" value="{{inputVal}}" focus="{{inputShowed}}" bindinput="inputTyping" />
-                        <view class="weui-icon-clear" wx:if="{{inputVal.length > 0}}" bindtap="clearInput">
-                            <icon type="clear" size="14"></icon>
-                        </view>
-                    </view>
-                    <label class="weui-search-bar__label" hidden="{{inputShowed}}" bindtap="showInput">
-                        <icon class="weui-icon-search" type="search" size="14"></icon>
-                        <view class="weui-search-bar__text">搜索</view>
-                    </label>
-                </view>
-                <view class="weui-search-bar__cancel-btn" hidden="{{!inputShowed}}" bindtap="hideInput">取消</view>
+        <view class="weui-search-bar">
+          <view class="weui-search-bar__form">
+            <view class="weui-search-bar__box">
+              <icon class="weui-icon-search_in-box" type="search" size="14"></icon>
+              <input type="text" class="weui-search-bar__input" placeholder="搜索" value="{{inputVal}}" focus="{{inputShowed}}" bindinput="inputTyping" />
+              <view class="weui-icon-clear" wx:if="{{inputVal.length > 0}}" bindtap="clearInput">
+                <icon type="clear" size="14"></icon>
+              </view>
             </view>
-            <view class="weui-cells searchbar-result" wx:if="{{inputVal.length > 0}}">
-                <navigator url="" class="weui-cell" hover-class="weui-cell_active">
-                    <view class="weui-cell__bd">
-                        <view>实时搜索文本</view>
-                    </view>
-                </navigator>
-                <navigator url="" class="weui-cell" hover-class="weui-cell_active">
-                    <view class="weui-cell__bd">
-                        <view>实时搜索文本</view>
-                    </view>
-                </navigator>
-                <navigator url="" class="weui-cell" hover-class="weui-cell_active">
-                    <view class="weui-cell__bd">
-                        <view>实时搜索文本</view>
-                    </view>
-                </navigator>
-                <navigator url="" class="weui-cell" hover-class="weui-cell_active">
-                    <view class="weui-cell__bd">
-                        <view>实时搜索文本</view>
-                    </view>
-                </navigator>
-            </view>
+            <label class="weui-search-bar__label" hidden="{{inputShowed}}" bindtap="showInput">
+              <icon class="weui-icon-search" type="search" size="14"></icon>
+              <view class="weui-search-bar__text">搜索</view>
+            </label>
+          </view>
+          <view class="weui-search-bar__cancel-btn" hidden="{{!inputShowed}}" bindtap="hideInput">取消</view>
         </view>
+        <view class="weui-cells searchbar-result" wx:if="{{inputVal.length > 0}}">
+          <navigator url="" class="weui-cell" hover-class="weui-cell_active">
+            <view class="weui-cell__bd">
+              <view>实时搜索文本</view>
+            </view>
+          </navigator>
+          <navigator url="" class="weui-cell" hover-class="weui-cell_active">
+            <view class="weui-cell__bd">
+              <view>实时搜索文本</view>
+            </view>
+          </navigator>
+          <navigator url="" class="weui-cell" hover-class="weui-cell_active">
+            <view class="weui-cell__bd">
+              <view>实时搜索文本</view>
+            </view>
+          </navigator>
+          <navigator url="" class="weui-cell" hover-class="weui-cell_active">
+            <view class="weui-cell__bd">
+              <view>实时搜索文本</view>
+            </view>
+          </navigator>
+        </view>
+      </view>
     </block>
     <swiper indicator-dots="{{indicatorDots}}" autoplay="{{autoplay}}" interval='{{interval}}' duration="{{duration}}">
       <block wx:for="{{imgUrls}}" wx:for-item='item'>
         <swiper-item>
-          <image src ="{{item.url}}" mode="aspectFill"/>
+          <image src="{{item.url}}" mode="aspectFill" />
         </swiper-item>
       </block>
     </swiper>
-  <view class ="page">     
+    <view class="page">
       <view class="page__hd">
-          <view class="page__title"></view>
-          <view class="page__desc"></view>
+        <view class="page__title"></view>
+        <view class="page__desc"></view>
       </view>
       <view class="page__bd">
-          <view class="weui-grids">
-            <block wx:for ="{{grids}}" wx:for-item="item">
+        <view class="weui-grids">
+          <block wx:for="{{grids}}" wx:for-item="item">
             <navigator url="{{item.url}}" class="weui-grid" hover-class="weui-grid_active">
-                  <image class="weui-grid__icon" src="{{item.icon}}" />
-                  <view class="weui-grid__label">{{item.name}}</view>
-              </navigator>
-            </block>
-          </view>
+              <image class="weui-grid__icon" src="{{item.icon}}" />
+              <view class="weui-grid__label">{{item.name}}</view>
+            </navigator>
+          </block>
+        </view>
       </view>
 
-        <view class = "main-container">
-          <block wx:if="{{goodsList == null}}">
-              <view class="weui-loadmore__tips">正在加载</view>
-          </block>
+      <view class="main-container">
+        <block wx:if="{{goodsList == null}}">
+          <view class="weui-loadmore__tips">正在加载</view>
+        </block>
 
-          <block wx:if="{{goodsList != null}}">
-              <view class = "main-container" wx:for="{{goodsList}}" wx:for-item="item" data-value = "{{item}}">
-                  <view class = "list-sec">
-                      <view class = "top-sec" style="height:{{sysWidth}}rpx">
-                          <image class="sec-img" src="{{item.goodsImg}}" background-size="cover" ></image>
-                      </view>
-                      <view class = "bottom-sec">
-                          <view class = "pirce-wrapper">
-                              <view class="inline-block now">￥{{item.Price}}</view>
-                          </view>
-                          <view class = "top-title">
-                              <view class = "text-overflow title inline-block">{{item.goodsName}}</view>
-                              <view class = "text-overflow description inline-block">{{item.tagline}}</view>
-                          </view>
-                      </view>
-                  </view>
+        <block wx:if="{{goodsList != null}}">
+          <view class="main-container" wx:for="{{goodsList}}" wx:for-item="item" data-value="{{item}}">
+            <view class="list-sec">
+              <view class="top-sec" style="height:{{sysWidth}}rpx">
+                <image class="sec-img" src="{{item.goodsImg}}" background-size="cover"></image>
               </view>
-          </block>
+              <view class="bottom-sec">
+                <view class="pirce-wrapper">
+                  <view class="inline-block now">￥{{item.Price}}</view>
+                </view>
+                <view class="top-title">
+                  <view class="text-overflow title inline-block">{{item.goodsName}}</view>
+                  <view class="text-overflow description inline-block">{{item.tagline}}</view>
+                </view>
+              </view>
+            </view>
+          </view>
+        </block>
       </view>
 
 
-  </view>
     </view>
   </view>
-  <view wx:else>
-<button open-type='getUserInfo' lang='zh_CN'  bindgetuserinfo="onGotUserInfo">授权登录 /
-Authorized to log in</button>
-
+</view>
+<view wx:else>
+  <view class='page__hd'>
+    <view class="page__title">注册个人信息</view>
+    <view class="page__desc">完善个人信息才能参与买卖哦。</view>
   </view>
+  <view class="page">
+    <view class="weui-cells weui-cells_after-title">
+      <view class="weui-cell weui-cell_input {{nameWarn?'weui-cell_warn':''}}">
+        <view class="weui-cell__hd">
+          <view class="weui-label">中文姓名</view>
+        </view>
+        <view class="weui-cell__bd">
+          <input class="weui-input" type="text" id="name" placeholder="请输入真实姓名" bindinput="bindinput" value="{{name}}" />
+        </view>
+        <view wx:if="{{nameWarn}}" class="weui-cell__ft">
+          <icon color="#E64340" size="23" type="warn"></icon>
+        </view>
+      </view>
+      <view class="weui-cell weui-cell_input {{schoolIdWarn?'weui-cell_warn':''}}">
+        <view class="weui-cell__hd">
+          <view class="weui-label">学号/工号</view>
+        </view>
+        <view class="weui-cell__bd">
+          <input class="weui-input" type="text" id="schoolId" placeholder="请输入学号/工号" bindinput="bindinput" value="{{schoolId}}" />
+        </view>
+        <view wx:if="{{schoolIdWarn}}" class="weui-cell__ft">
+          <icon color="#E64340" size="23" type="warn"></icon>
+        </view>
+      </view>
+    </view>
+
+
+    <view class="weui-cells weui-cells_after-title ">
+      <view class="weui-cell weui-cell_input ">
+        <view class="weui-cell__hd">
+          <view class="weui-label">手机</view>
+        </view>
+        <view class="weui-cell__bd">
+          <input class="weui-input" type="text" id="phone" placeholder="请输入手机号码" bindinput="bindinput" value="{{phone}}" />
+        </view>
+        <view class="weui-cell__ft">
+          <button open-type="getPhoneNumber" bindgetphonenumber="getWeixinPhone">
+            <view class="weui-vcode-btn">直接绑定</view>
+          </button>
+        </view>
+      </view>
+      <view wx:if="{{phoneWarn}}" class="weui-cell__ft">
+        <icon color="#E64340" size="23" type="warn"></icon>
+      </view>
+    </view>
+    <view class="weui-cells__title">选择</view>
+
+    <view class="weui-cells weui-cells_after-title">
+      <view class="weui-cell weui-cell_select ">
+        <view class="weui-cell__hd weui-cell__hd_in-select-after">
+          <view class="weui-label">学院</view>
+        </view>
+        <view class="weui-cell__bd">
+          <picker id="schoolDepartment" bindchange="bindinput" value="{{departmentIndex}}" range='{{schoolDepartmentList}}'>
+            <view class='weui-select weui-select_in-select-after'>{{schoolDepartmentList[departmentIndex]}}</view>
+          </picker>
+        </view>
+      </view>
+    </view>
+
+      <view class="weui-cells weui-cells_after-title">
+      <view class="weui-cell weui-cell_select ">
+        <view class="weui-cell__hd weui-cell__hd_in-select-after">
+          <view class="weui-label">校区</view>
+        </view>
+        <view class="weui-cell__bd">
+          <picker id="place" bindchange="bindinput" value="{{placeIndex}}" range='{{placeList}}'>
+            <view class='weui-select weui-select_in-select-after'>{{placeList[placeIndex]}}</view>
+          </picker>
+        </view>
+      </view>
+    </view>
+    <view class="weui-cells weui-cells_after-title">
+      <view class="weui-cell weui-cell_select ">
+        <view class="weui-cell__hd weui-cell__hd_in-select-after">
+          <view class="weui-label">性别</view>
+        </view>
+        <view class="weui-cell__bd">
+          <picker id="gender" bindchange="bindinput" value="{{genderIndex}}" range='{{genderList}}'>
+            <view class='weui-select weui-select_in-select-after'>{{genderList[genderIndex]}}</view>
+          </picker>
+        </view>
+      </view>
+    </view>
+    <button class="weui-btn" type="primary" open-type='getUserInfo' lang='zh_CN' bindgetuserinfo="onGotUserInfo">→授权登录 ←</button>
+
+
+    <button class='saveInfo {{allowSave?"active":"negative"}}' disabled="{{allowSave?false:true}}" bindtap="saveInfo">认证身份</button>
+  </view>
+
+</view>

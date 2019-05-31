@@ -7,18 +7,18 @@ var order_detail = {
       "buyNums": 1,
       "orderList": [
         {
-          "buyNum": 2,
+          "buyNum": 3,
           "goodsImg": "../../resources/active.png",
           "goodsName": "Idontnow",
           "goodsStandardDes": "颜色：红色  尺码：s",
-          "sellPrice": 299,
+          "sellPrice": 9.9,
           "shopId": 1,
         }
       ],
       "orderNum": "abc2511483687801946",
       "orderStatusStr": "已完成",
       "orderTime": 1483687801000,
-      "totalPrice": 0
+      "totalPrice": 29.7
     },
     {
       "buyNums": 1,
@@ -35,7 +35,7 @@ var order_detail = {
       "orderNum": "abc2511483616883663",
       "orderStatusStr": "已完成",
       "orderTime": 1483616883000,
-      "totalPrice": 0
+      "totalPrice": 598
     }
   ],
 }

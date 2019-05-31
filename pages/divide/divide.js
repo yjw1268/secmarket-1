@@ -60,7 +60,6 @@ Page({
     curIndex: 0
   },
   onLoad: function(option) {
-    //console.log(this.data.navRightItems[this.data.curIndex])
     var that = this
     var classification = option.classification
     wrapper.request({
@@ -89,7 +88,7 @@ Page({
   switchRightTab: function(e) {
     let id = e.target.dataset.id
     wrapper.request({
-      url: "",
+      url: " ",
       data: {
         openid: wx.getStorageSync('openid'),
         classification: id,
