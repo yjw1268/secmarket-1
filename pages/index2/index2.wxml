@@ -1,7 +1,7 @@
 <!--index2.wxml-->
 <view wx:if="{{hasAuth&&hasRegister}}">
   <view class="container">
-  
+
     <block wx:if="{{searchbar}}">
       <view class="page__bd">
         <view class="weui-search-bar">
@@ -44,16 +44,16 @@
         </view>
       </view>
     </block>
-    
-    <swiper class='swiperClass' autoplay indicator-color="#a39f99" indicator-active-color="#f49641" indicator-dots  interval="{{interval}}" duration="{{duration}}" previous-margin="30px" next-margin="30px" circular id="swiper" bindchange="bindinput" >
-    <block wx:for="{{imgUrls}}" wx:key="{{index}}">
-    <swiper-item>
 
- <image src="{{item}}" class="slide-image {{swiperIndex == index ? 'active' : 'quiet'}}" mode='aspectFill'>
- </image>
- </swiper-item>
- </block>
- </swiper>
+    <swiper class='swiperClass' autoplay indicator-color="#a39f99" indicator-active-color="#f49641" indicator-dots interval="{{interval}}" duration="{{duration}}" previous-margin="30px" next-margin="30px" circular id="swiper" bindchange="bindinput">
+      <block wx:for="{{imgUrls}}" wx:key="{{index}}">
+        <swiper-item>
+
+          <image src="{{item}}" class="slide-image {{swiperIndex == index ? 'active' : 'quiet'}}" mode='aspectFill'>
+          </image>
+        </swiper-item>
+      </block>
+    </swiper>
     <view class="page">
       <view class="page__bd">
         <view class="weui-grids">
@@ -160,7 +160,7 @@
       </view>
     </view>
 
-      <view class="weui-cells weui-cells_after-title">
+    <view class="weui-cells weui-cells_after-title">
       <view class="weui-cell weui-cell_select ">
         <view class="weui-cell__hd weui-cell__hd_in-select-after">
           <view class="weui-label">校区</view>

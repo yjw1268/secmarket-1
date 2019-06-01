@@ -31,6 +31,15 @@
         </view>
       </view>
     </view>
+
+    <view class="weui-cells__title" >商品数量</view>
+    <view class="weui-cells weui-cells_after-title">
+      <view class="weui-cell weui-cell_input">
+        <view class="weui-cell__bd">
+          <input class="weui-input" type="number" id="commodityNum" placeholder="请填写贩卖的商品数量" bindinput="bindinput" value="{{commodityNum}}" maxlength="3" />
+        </view>
+      </view>
+    </view>
     <view class="weui-cells__title">描述</view>
     <view class="weui-cells weui-cells_after-title">
       <view class="weui-cell">

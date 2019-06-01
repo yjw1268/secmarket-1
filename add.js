@@ -7,11 +7,6 @@ Page({
       groupRange:['我要卖','我要买'],
       group:0,
       master:1,
-      commodityNum:0,
-      intro:'',
-      price:'',
-      place:'',
-      classification:'',
       title:"",
       allowUpload:false,
       uploading:false,
@@ -20,29 +15,6 @@ Page({
       cred:null,
       file:[],
       wordNum:0
-  },
-
-  getCredentials() {
-    if (!this.data.fileHash) {
-      return
-    }
-    wrapper.request({
-      url: "/siceapp/fpc/get_upload_credentials",
-      method: "POST",
-      header: {
-        "content-type": "application/x-www-form-urlencoded"
-      },
-      data: {
-        "upload_key": this.data.fileHash,
-      },
-      success: res => {
-        if (res.data.status) {
-          this.setData({
-            credentials: res.data.data.credentials
-          })
-        }
-      }
-    })
   },
   chsImg() {
     let that = this;
@@ -120,7 +92,7 @@ Page({
     });
     let that = this;
     let uploadTask = wx.uploadFile({
-      url: 'https://www.bupt404.cn/secmarket/testfile.php',
+      url: 'https://upload-z1.qiniup.com',
       filePath: currentValue.path,
       name: 'file',
       formData: {
@@ -210,7 +182,7 @@ Page({
   upload(e) {
     let that = this;
     let masterUploadID = null;
-    this.data.file.forEach(function (currentValue, index, array) {  
+    this.data.file.forEach(function (currentValue, index, array) {
       let masterTitle = that.data.title;
       let masterIntro = that.data.intro;
       let master = that.data.master;
@@ -221,7 +193,7 @@ Page({
           masterUploadID = data.data.upload_id;
           dataRaw = {
             upload_key: data.data.upload_key,
-            openid: data.data.upload_id,
+            upload_id: data.data.upload_id,
             title: masterTitle,
             master: master
           };
@@ -235,7 +207,7 @@ Page({
           }
         }
         wrapper.request({
-          url: "https://www.bupt404.cn/secmarket/testfile.php",
+          url: "/siceapp/bpc/upload_content",
           data: dataRaw,
           method: "POST",
           header: {

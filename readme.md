@@ -44,7 +44,7 @@ data:{
 
 ```
 url:apiBase+"upLoadCommodity.php"
-method:POST
+method:POST 
 data:{
 
   commodityName

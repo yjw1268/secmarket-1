@@ -39,7 +39,7 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": 3,
+			"current": 5,
 			"list": [
 				{
 					"id": -1,
@@ -66,6 +66,21 @@
 					"id": -1,
 					"name": "购物",
 					"pathName": "pages/add/add",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "add",
+					"pathName": "pages/add/add",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": 5,
+					"name": "addtest",
+					"pathName": "pages/addtest/addtest",
+					"query": "",
 					"scene": null
 				}
 			]

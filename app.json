@@ -5,7 +5,8 @@
     "pages/detail/detail",
     "pages/me/me",
     "pages/order/order",
-    "pages/divide/divide"
+    "pages/divide/divide",
+    "pages/addtest/addtest"
   ],
   "window": {
     "backgroundTextStyle": "light",
