@@ -5,9 +5,8 @@
     "pages/detail/detail",
     "pages/me/me",
     "pages/order/order",
-    "pages/divide/divide",
-    "pages/addtest/addtest"
-  ],
+    "pages/divide/divide" 
+     ],
   "window": {
     "backgroundTextStyle": "light",
     "navigationBarBackgroundColor": "#fff",

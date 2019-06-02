@@ -90,8 +90,9 @@
           </view>
         </block>
       </view>
-
-
+     <view bindtap='goUpload'>
+      <image class="add_icon" src="/resources/plus_red.png"></image>
+    </view>
     </view>
   </view>
 </view>

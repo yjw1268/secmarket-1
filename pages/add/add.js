@@ -1,50 +1,28 @@
-// pages/add/add.js
 
-const CAMERA_SIZE_MIN = 0;
-const CAMERA_SIZE_MAX = 10*1024*1024;
+const CAMERA_SIZE_MIN = 1;
+const CAMERA_SIZE_MAX = 10 * 1024 * 1024;
 Page({
   data: {
-      groupRange:['我要卖','我要买'],
-      group:0,
-      master:1,
-      commodityNum:0,
-      intro:'',
-      price:'',
-      place:'',
-      classification:'',
-      title:"",
-      allowUpload:false,
-      uploading:false,
-      prgressColor:'#f44336',
-      link:null,
-      cred:null,
-      file:[],
-      wordNum:0
+    groupRange: ['我要卖', '我要买'],
+    classRange: ['书籍报刊', '化妆护肤', '衣物鞋子', '电子数码 ', '我要求购', '食品饮品', '文具用品', '游戏动漫', '乐器类', '体育用品 ', '珠宝首饰', '其他'],
+    classIndex: 0,
+    group: 0,
+    master: 1,
+    numberChoices: 0,
+    place: '沙河校区',
+    placeList: ['沙河校区', '西土城校区', '宏福校区'],
+    placeIndex: 0,
+    intro: '',
+    price: '',
+    title: "",
+    allowUpload: false,
+    uploading: false,
+    prgressColor: '#f44336',
+    link: null,
+    file: [],
+    wordNum: 0
   },
-
-  getCredentials() {
-    if (!this.data.fileHash) {
-      return
-    }
-    wrapper.request({
-      url: "/siceapp/fpc/get_upload_credentials",
-      method: "POST",
-      header: {
-        "content-type": "application/x-www-form-urlencoded"
-      },
-      data: {
-        "upload_key": this.data.fileHash,
-      },
-      success: res => {
-        if (res.data.status) {
-          this.setData({
-            credentials: res.data.data.credentials
-          })
-        }
-      }
-    })
-  },
-  chsImg() {
+  chsImg() {           //选择图片生成file array
     let that = this;
     wx.chooseImage({
       count: 1, // 默认9
@@ -74,19 +52,15 @@ Page({
                 icon: 'none'
               })
             } else {
-              that.getCredentials(res.digest, function () {
-                //console.log(that.cred);
-                that.data.file.push({
-                  path: filePathTem,
-                  size: res.size,
-                  hash: res.digest,
-                  credentials: that.data.cred
-                });
-                that.setData({
-                  file: that.data.file,
-                });
-                that.checkUpload();
+              that.data.file.push({
+                path: filePathTem,
+                size: res.size,
+                hash: res.digest
               });
+              that.setData({
+                file: that.data.file
+              });
+              that.checkUpload();
             }
           }
         });
@@ -108,7 +82,13 @@ Page({
     var hex = ((r << 16) | (g << 8) | b).toString(16);
     return "#" + new Array(Math.abs(hex.length - 7)).join("0") + hex;
   },
-
+  deleteImg() {
+    this.data.file.pop();
+    let file = this.data.file
+    this.setData({
+      file: file
+    })
+  },
   uploadImg(currentValue, callback) {
     wx.showLoading({
       title: '上传中...',
@@ -119,20 +99,21 @@ Page({
       uploadPercent: 0
     });
     let that = this;
+    // formData:{key:currentValue.hash,}  v:1.0
     let uploadTask = wx.uploadFile({
       url: 'https://www.bupt404.cn/secmarket/testfile.php',
       filePath: currentValue.path,
       name: 'file',
       formData: {
-        key: currentValue.hash,
-        token: currentValue.credentials
+        openid: wx.getStorageSync('openid')
       },
       success: function (res) {
         // that.setData({
         //     uploadPercent: 100
         // });
-        if (res.statusCode == 200) {
-          callback(JSON.parse(res.data));
+        if (res) {
+          // callback(JSON.parse(res.data));
+          console.log(res)
         } else {
           wx.showToast({
             title: '上传过程中发生了错误',
@@ -148,13 +129,14 @@ Page({
           icon: 'none',
           duration: 1500
         })
-        console.log(JSON.parse(res.data))
+        console.log(res.data)
+        // console.log(JSON.parse(res.data))
       },
       complete: function (res) {
         wx.hideLoading();
       }
     });
-    uploadTask.onProgressUpdate((res) => {
+    uploadTask.onProgressUpdate((res) => { //监听上传进度变化事件
       let p = res.progress;
       let r = 255, g = 255;
       if (p >= 50) {
@@ -178,23 +160,37 @@ Page({
           title: e.detail.value
         })
         break;
-         case "intro":
-         var len=parseInt(e.detail.value.length)
+      case "intro":
+        var len = parseInt(e.detail.value.length)
         this.setData({
           intro: e.detail.value,
-          wordNum:len
+          wordNum: len
         })
         break;
-      case "link":
+      case "price":
         this.setData({
-          link: e.detail.value
+
+          price: e.detail.value
         })
+        break; 
+        case "place":
+        this.setData({
+          place: that.data.placeList[e.detail.value],
+          placeIndex: e.detail.value
+        })
+        break;
+      case "numberChoices":
+        this.setData({
+          numberChoices: e.detail.value,
+        })
+        break;
+
 
     }
-   this.checkUpload();
+    this.checkUpload();
   },
   checkUpload() {
-    if (((this.data.group == 0 && this.data.file.length >= 1) || (this.data.group == 1 )) && this.data.title) {
+    if (((this.data.group == 0 && this.data.file.length >= 1) || (this.data.group == 1)) && this.data.title) {
       console.log("true");
       this.setData({
         allowUpload: true
@@ -207,32 +203,29 @@ Page({
     }
   },
 
-  upload(e) {
+  upload(e) {         //上传主函数
     let that = this;
-    let masterUploadID = null;
-    this.data.file.forEach(function (currentValue, index, array) {  
-      let masterTitle = that.data.title;
-      let masterIntro = that.data.intro;
+    //let masterUploadID = null;
+    this.data.file.forEach(function (currentValue, index, array) {  //循环函数
+      let title = that.data.title;
+      let intro = that.data.intro;
       let master = that.data.master;
+      let cla = that.data.classIndex + 1;
+      let place = that.data.place;
+      let price = that.data.price;
+      let num = that.data.numberChoices;
+
       that.uploadImg(currentValue, (data) => {
-        console.log(data);
+        console.log(data + "test");
         let dataRaw = null;
-        if (index == 0) {
-          masterUploadID = data.data.upload_id;
-          dataRaw = {
-            upload_key: data.data.upload_key,
-            openid: data.data.upload_id,
-            title: masterTitle,
-            master: master
-          };
-        } else {
-          dataRaw = {
-            upload_key: data.data.upload_key,
-            upload_id: data.data.upload_id,
-            title: masterTitle,
-            master: master / 10,
-            //tx_url: masteUploadID
-          }
+        dataRaw = {
+          openid: wx.getStorageSync('openid'),
+          title: title,
+          classification: cla,
+          price: price,
+          place: place,
+          intro: intro,
+          number: num,
         }
         wrapper.request({
           url: "https://www.bupt404.cn/secmarket/testfile.php",
@@ -245,10 +238,9 @@ Page({
             that.setData({
               uploading: false
             });
-            if (res.data.status && (index + 1 == array.length)) {
-              wrapper.uploadFormId(e.detail.formId);
+            if (res.data) {
               wx.showToast({
-                title: '上传成功，请等待审核',
+                title: '上传成功',
                 icon: 'none',
                 mask: true,
                 duration: 2000,

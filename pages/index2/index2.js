@@ -114,6 +114,12 @@ Page({
       inputVal: e.detail.value
     });
   }, /////search 
+ 
+ goUpload(){
+wx.navigateTo({
+  url: '/pages/add/add',
+})
+ },
 
   bindinput(e) {
 

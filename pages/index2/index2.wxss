@@ -64,8 +64,8 @@
 }
 
 .text-overflow {
-  word-break: break-all; 
-  white-space: nowrap;  /*不换行 */
+  word-break: break-all;
+  white-space: nowrap; /*不换行 */
   overflow: hidden; /* 内容超出宽度时隐藏超出部分的内容 */
   text-overflow: ellipsis; /* 当对象内文本溢出时显示省略标记(...) ；需与overflow:hidden;一起使用。*/
 }
@@ -106,7 +106,7 @@
 
 .main-container {
   position: flex;
-  flex-direction:column;
+  flex-direction: column;
   /*top: 94rpx;
   bottom: 0;*/
   width: 100%;
@@ -121,7 +121,7 @@
 }
 
 .top-slider {
- flex:1;  
+  flex: 1;
   width: 100%;
   height: 40%;
   background: white;
@@ -168,12 +168,11 @@
   margin: 0 auto;
   background: white;
   box-sizing: border-box;
-    border-radius: 10rpx;
-
+  border-radius: 10rpx;
 }
 
 .bottom-sec {
-  flex:2;
+  flex: 2;
   position: relative;
   padding: 20rpx;
   display: inline-block;
@@ -223,11 +222,11 @@
 }
 
 .top-title .description {
-/*  max-width: 35%;*/
- width:420rpx;
+  /*  max-width: 35%;*/
+  width: 420rpx;
   color: #888;
   font-size: 24rpx;
- /* word-break:break-all;  
+  /* word-break:break-all;  
   white-space:pre-line;*/
 }
 
@@ -241,24 +240,24 @@
   background-color: red;
 }
 
-.simage{
-  width:100%;
-  height:100%;
-  display:inline-block;
+.simage {
+  width: 100%;
+  height: 100%;
+  display: inline-block;
   overflow: hidden;
 }
 
 .swiperClass {
-width:100%;
-  height:600rpx;
-  display:inline-block;
+  width: 100%;
+  height: 600rpx;
+  display: inline-block;
   overflow: hidden;
   margin: 0;
   margin-top: 10rpx;
 }
 
 .slide-image {
-  width: 100%; 
+  width: 100%;
   height: 90%;
   border-radius: 10px;
   position: relative;
@@ -267,11 +266,19 @@ width:100%;
 image.active {
   transform: none;
   transition: all 0.2s ease-in 0s;
-} 
+}
 
 image.quiet {
   transform: scale(0.8333333);
   transition: all 0.2s ease-in 0s;
+}
+
+.add_icon {
+  position: fixed;
+  width: 42px;
+  height: 42px;
+  bottom: 30px;
+  right: 20px;
 }
 
 /*
