@@ -1,31 +1,34 @@
   <view class="nav_left">
-    <block wx:for="{{navLeftItems}}">
+    <block wx:for="{{navLeftItems}}" wx:key>
       <view class="nav_left_items {{curNav == item.id ? 'active' : ' '}}" bindtap="switchRightTab" data-id="{{item.id}}">{{item.name}}</view>
     </block>
   </view>
-  <view class="nav_right">
+  <view class="nav_right" wx:if="{{navRightItems.title}}">
     <!--如果有数据，才遍历项-->
-    <view wx:if="{{navRightItems[curNav]}}">
-      <block wx:for="{{navRightItems}}" wx:for-item="item">
+    <view wx:if="{{navRightItems}}">
+      <block wx:for="{{navRightItems}}" wx:for-item="item" wx:key>
         <view class="nav_right_items">
-          <navigator url="../../detail/detail?CId={{item.CId}}">
+          <navigator  url="/pages/detail/detail?No={{item.No}}">
             <view>
-              <block wx:if="{{item.commodityImage}}">
-                <image src="{{item.commodityImage}}"></image>
+              <block wx:if="{{item.pic}}">
+                <image src="{{item.pic}}"></image>
               </block>
               <block wx:else>
                 <image src="../../resources/active1.png"></image>
               </block>
             </view>
-            <view wx:if="{{item.intro}}">
-              <text>{{item.intro}}</text>
+            <view wx:if="{{item.title}}">
+              <text>{{item.title}}</text>
             </view>
             <view wx:else>
-              <text>"暂无描述"</text>
+              <text>"暂无商品"</text>
             </view>
           </navigator>
         </view>
       </block>
     </view>
     <view wx:else>暂无数据</view>
+  </view>
+  <view wx:else class="blankpage">
+  NO GOODS FOUND!
   </view>

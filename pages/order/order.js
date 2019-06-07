@@ -7,15 +7,15 @@ var order_detail = {
       "buyNums": 1,
       "orderList": [
         {
-          "buyNum": 3,
+          "amount": 3,
           "goodsImg": "../../resources/active.png",
-          "goodsName": "Idontnow",
+          "title": "Idontnow",
           "goodsStandardDes": "颜色：红色  尺码：s",
           "sellPrice": 9.9,
-          "shopId": 1,
+          "cNo": 1,
         }
       ],
-      "orderNum": "abc2511483687801946",
+      "No": "abc2511483687801946",
       "orderStatusStr": "已完成",
       "orderTime": 1483687801000,
       "totalPrice": 29.7
@@ -24,15 +24,15 @@ var order_detail = {
       "buyNums": 1,
       "orderList": [
         {
-          "buyNum": 2,
+          "amount": 2,
           "goodsImg": "../../resources/active.png",
-          "goodsName": "egg",
+          "title": "egg",
           "goodsStandardDes": "颜色：红色  尺码：s",
           "sellPrice": 299,
-          "shopId": 1,
+          "cNo": 1,
         }
       ],
-      "orderNum": "abc2511483616883663",
+      "No": "abc2511483616883663",
       "orderStatusStr": "已完成",
       "orderTime": 1483616883000,
       "totalPrice": 598
@@ -51,7 +51,7 @@ Page({
     this.setData({
       curNav: 0,
     }); 
-    wrapper.request({
+    wx.request({
       url: wrapper.WCONST.apiBase +"getOrder.php",
       data: {
         openid: wx.getStorageSync('openid'),
@@ -61,23 +61,23 @@ Page({
         "content-type": "application/x-www-form-urlencoded"
       },
       success: res => {
-        if (res.data) {
+        console.log(res)
+       /* if (res.data) {
           this.setData({
-         [order_detail.data]:res.data
+         order:res.data
           })
-        }
+        }*/
       }
     })
 
   },
   onShow: function () {
-    var self = this;
-    var self = self,
-      info = order_detail.data;
+    var that = this;
+     var  info = order_detail.data;
     info.forEach(function (value) {
       value.timer = util.formatTime(new Date(value.orderTime), "yyyy-MM-dd hh:mm");
     });
-    self.setData({
+    that.setData({
       order: info
     });
   },

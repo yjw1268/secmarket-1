@@ -1,0 +1,17 @@
+/* pages/chatroom/chatroomLQ/chatroomLQ.wxss */
+
+@import "chatroom.wxss";
+
+.content {
+    font-size: 32rpx;
+}
+
+.user-text {
+    background-color: #0188FB;
+    color: #FFFFFF;
+}
+
+.other-text {
+    background-color: #FFFFFF;
+    color: #000000;
+}

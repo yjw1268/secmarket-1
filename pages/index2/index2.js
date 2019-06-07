@@ -1,54 +1,56 @@
 // inedx2.js
+var app=getApp();
+
 Page({
   data: {
     hasAuth: wx.canIUse('button.open-type.getUserInfo'),
     grids: [
         {
-        url: "/pages/",
+        url: "/pages/divide/divide?id=0",
         icon: "/resources/subnav_05.png",
         name: "书籍报刊"
       }, {
-        url: "/pages/",
+        url: "/pages/divide/divide?id=1",
         icon: "/resources/subnav_05.png",
         name: "化妆护肤"
       }, {
-        url: "/pages/",
+        url: "/pages/divide/divide?id=2",
         icon: "/resources/subnav_05.png",
         name: "衣物鞋子"
       }, {
-        url: "/pages/",
+        url: "/pages/divide/divide?id=0",
         icon: "/resources/subnav_05.png",
         name: "电子数码"
       }, {
-        url: "/pages/",
+        url: "/pages/divide/divide?id=3",
         icon: "/resources/more.png",
         name: "我要求购"
       }, {
-        url: "/pages/",
+        url: "/pages/divide/divide?id=4",
         icon: "/resources/subnav_05.png",
         name: "食品"
       }, {
-        url: "/pages/",
+        url: "/pages/divide/divide?id=5",
         icon: "/resources/subnav_05.png",
         name: "文具用品"
       }, {
-        url: "/pages/",
+        url: "/pages/divide/divide?id=6",
         icon: "/resources/subnav_05.png",
         name: "游戏动漫"
       }, {
-        url: "/pages/",
+        url: "/pages/divide/divide?id=7",
         icon: "/resources/subnav_05.png",
         name: "乐器类"
       }, {
-        url: "/pages/",
+        url: "/pages/divide/divide?id=8",
         icon: "/resources/subnav_05.png",
         name: "体育用品"
       }, {
-        url: "/pages/",
+        url: "/pages/divide/divide?id=9",
         icon: "/resources/subnav_05.png",
         name: "珠宝首饰"
       }, {
-        url: "/pages/",
+        url: "/pages/divide/divide?id=10",
         icon: "/resources/subnav_05.png",
         name: "其他"
       }
@@ -71,15 +73,15 @@ Page({
     indicatorDots: true,
     goodsList: [
       {
-      goodsImg: "/resources/test1.gif",
-      goodsName: "awsl",
-      Price: "99",
-      tagline: 'descriptionssssso我哦是嗖嗖的丰厚海淀搜狐分都说了弗老师来说火蓝刀锋好了水利水电风凉话',
+      pic: "/resources/test1.gif",
+      title: "awsl",
+      price: "99",   
+      intro: 'this is a description',
     }, {
-      goodsImg: "/resources/test1.gif",
-      goodsName: "阿伟",
-      Price: "999",
-      tagline: '我还能肝！！！！！！',
+      pic: "/resources/test1.gif",
+      title: "A sofa",
+      price: "999",
+      intro: 'comfortable sofa!',
     }],
     inputShowed: false,
     inputVal: "",
@@ -114,7 +116,13 @@ Page({
       inputVal: e.detail.value
     });
   }, /////search 
- 
+ goToDivide(e){
+   console.log(e.currentTarget.dataset.id)
+   app.globalData.id = e.currentTarget.dataset.id+1
+   wx.switchTab({
+     url: '/pages/divide/divide'
+   })
+ },
  goUpload(){
 wx.navigateTo({
   url: '/pages/add/add',
@@ -290,7 +298,17 @@ wx.navigateTo({
         }
       }
     })
-
+    wx.request({
+      url: 'https://www.bupt404.cn/secmarket/getIndex.php',
+      method:"GET",
+      data:{openid:wx.getStorageSync("openid")},
+      success:(res)=>{
+        console.log(res.data)
+        this.setData({
+          goodsList:res.data
+        })
+      }
+    })
   },
 
 

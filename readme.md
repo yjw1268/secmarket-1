@@ -23,7 +23,7 @@
 ```
 ## getClassification   //获取分类的商品列表页面
 ```
-url:apiBase+"getIndex.php"
+url:apiBase+"getClassification.php"
 method:GET
 data:{
   openid:

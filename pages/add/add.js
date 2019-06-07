@@ -1,10 +1,11 @@
 
 const CAMERA_SIZE_MIN = 1;
 const CAMERA_SIZE_MAX = 10 * 1024 * 1024;
+let app=getApp();
 Page({
   data: {
     groupRange: ['我要卖', '我要买'],
-    classRange: ['书籍报刊', '化妆护肤', '衣物鞋子', '电子数码 ', '我要求购', '食品饮品', '文具用品', '游戏动漫', '乐器类', '体育用品 ', '珠宝首饰', '其他'],
+    classList: ['书籍报刊', '化妆护肤', '衣物鞋子', '电子数码 ', '我要求购', '食品饮品', '文具用品', '游戏动漫', '乐器类', '体育用品 ', '珠宝首饰', '其他'],
     classIndex: 0,
     group: 0,
     master: 1,
@@ -169,7 +170,6 @@ Page({
         break;
       case "price":
         this.setData({
-
           price: e.detail.value
         })
         break; 
@@ -177,6 +177,11 @@ Page({
         this.setData({
           place: that.data.placeList[e.detail.value],
           placeIndex: e.detail.value
+        })
+        break;
+      case "class":
+        this.setData({
+          classIndex: e.detail.value
         })
         break;
       case "numberChoices":
@@ -190,7 +195,7 @@ Page({
     this.checkUpload();
   },
   checkUpload() {
-    if (((this.data.group == 0 && this.data.file.length >= 1) || (this.data.group == 1)) && this.data.title) {
+    if ((this.data.group == 0 && this.data.file.length >= 1) || (this.data.group == 1))  {
       console.log("true");
       this.setData({
         allowUpload: true
@@ -203,58 +208,60 @@ Page({
     }
   },
 
-  upload(e) {         //上传主函数
+  upload(e) {
+    console.log("正在上传")         //上传主函数
     let that = this;
     //let masterUploadID = null;
-    this.data.file.forEach(function (currentValue, index, array) {  //循环函数
-      let title = that.data.title;
-      let intro = that.data.intro;
-      let master = that.data.master;
-      let cla = that.data.classIndex + 1;
-      let place = that.data.place;
-      let price = that.data.price;
-      let num = that.data.numberChoices;
-
-      that.uploadImg(currentValue, (data) => {
-        console.log(data + "test");
-        let dataRaw = null;
-        dataRaw = {
-          openid: wx.getStorageSync('openid'),
-          title: title,
-          classification: cla,
-          price: price,
-          place: place,
-          intro: intro,
-          number: num,
-        }
-        wrapper.request({
-          url: "https://www.bupt404.cn/secmarket/testfile.php",
-          data: dataRaw,
-          method: "POST",
-          header: {
-            "content-type": "application/x-www-form-urlencoded"
-          },
-          success: res => {
-            that.setData({
-              uploading: false
-            });
-            if (res.data) {
-              wx.showToast({
-                title: '上传成功',
-                icon: 'none',
-                mask: true,
-                duration: 2000,
-                success: () => {
-                  setTimeout(() => {
-                    wx.navigateBack();
-                  }, 1000)
-                }
-              });
+    let title = that.data.title;
+    let intro = that.data.intro;
+    let master = that.data.master;
+    let cla = that.data.classIndex + 1;
+    let place = that.data.place;
+    let price = that.data.price;
+    let num = that.data.numberChoices;
+    wx.request({
+      url: "https://www.bupt404.cn/secmarket/testfile.php",
+      data: {
+        openid: wx.getStorageSync('openid'),
+        title: title,
+        classification: cla,
+        price: price,
+        place: place,
+        intro: intro,
+        amount: num,
+      },
+      method: "POST",
+      header: {
+        "content-type": "application/x-www-form-urlencoded"
+      },
+      success: res => {
+        console.log(res.data)
+        that.setData({
+          uploading: false
+        });
+        if (res.data) {
+          wx.showToast({
+            title: '上传成功',
+            icon: 'none',
+            mask: true,
+            duration: 2000,
+            success: () => {
+              setTimeout(() => {
+                wx.navigateBack();
+              }, 2000)
             }
-          }
-        })
+          });
+        }
+      }
+    })
+    this.data.file.forEach(function (currentValue, index, array) {  //循环函数
+      that.uploadImg(currentValue, (data) => {
+        let dataRaw = null;
+        console.log(dataRaw)
       })
+
     });
+   
   },
 
   onLoad: function (options) {

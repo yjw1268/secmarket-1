@@ -5,8 +5,10 @@
     "pages/detail/detail",
     "pages/me/me",
     "pages/order/order",
-    "pages/divide/divide" 
-     ],
+    "pages/divide/divide",
+    "pages/success/success",
+    "pages/contact/contact"
+  ],
   "window": {
     "backgroundTextStyle": "light",
     "navigationBarBackgroundColor": "#fff",
@@ -35,7 +37,7 @@
         "pagePath": "pages/order/order",
         "iconPath": "resources/starIcon.png",
         "selectedIconPath": "resources/starIcon2.png",
-        "text": "购物车"
+        "text": "我的商品"
       },
       {
         "pagePath": "pages/me/me",

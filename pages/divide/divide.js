@@ -1,5 +1,5 @@
 const wrapper = require('../../utils/wrapper');
-
+let app = getApp();
 Page({
   data: {
     navLeftItems: [{
@@ -39,47 +39,36 @@ Page({
       id: 12,
       name: '其他'
     }],
-    navRightItems: [{
-      CId: 1,
-      commodityName: "bug",
-      numChoices: 2,
-      commodityImage: "/resources/active.png",
-      intro: "这是每个程序员都想要的宝贝",
-      price: 233,
-      place: "沙河校区"
-    }, {
-      CId: 2,
-      commodityName: "八哥呵呵呵",
-      numChoices: 2,
-      commodityImage: "/resources/active1.png",
-      intro: "这shi宝贝",
-      price: 233,
-      place: "沙河校区"
-    }],
+    navRightItems: [],
     curNav: 1,
-    curIndex: 0
+    curIndex: 1
   },
-  onLoad: function(option) {
+  onShow: function(option) {
     var that = this
-    var classification = option.classification
-    wrapper.request({
-      url: "",
+    if(app.globalData.id){
+    var classification = app.globalData.id;}else{
+      var classification=1
+    }
+    wx.request({
+      url: "https://www.bupt404.cn/secmarket/getClassification.php",
       data: {
         openid: wx.getStorageSync('openid'),
         classification: classification,
-        index:0
+        index: 0
       },
       method: "GET",
       header: {
         "content-type": "application/x-www-form-urlencoded"
       },
       success: res => {
-        if (res.data.status) {
+        console.log(classification)
+        if (res.data) {
           this.setData({
-            curNav:classification,
+            curNav: classification,
             navRightItems: res.data
           })
         }
+        app.globalData.id=1;
       }
     })
   },
@@ -87,8 +76,8 @@ Page({
 
   switchRightTab: function(e) {
     let id = e.target.dataset.id
-    wrapper.request({
-      url: " ",
+    wx.request({
+      url: "https://www.bupt404.cn/secmarket/getClassification.php",
       data: {
         openid: wx.getStorageSync('openid'),
         classification: id,
@@ -99,7 +88,8 @@ Page({
         "content-type": "application/x-www-form-urlencoded"
       },
       success: res => {
-        if (res.data.status) {
+        console.log(res)
+        if (res.data) {
           this.setData({
             curNav: id,
             navRightItems: res.data

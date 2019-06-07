@@ -3,34 +3,70 @@ Page({
 
   data: {
    commodity:{
-      CId: 2,
-      commodityName: "八哥呵呵呵",
+      No: 1,
+      title: "商品丢失了",
       numChoices: 2,
-     commodityImage: ["/resources/test2.jpg","/resources/test2.jpg",
-      "/resources/active1.png"],
-      intro: "这shi宝贝",
+     commodityImage: ["/resources/notfound.jpg","/resources/notfound.jpg",
+      "/resources/notfound.jpg"],
+      Introduction: "您走到了无人的摊位哦",
       price: 233,
-      place: "沙河校区"
+      site: "bug的深渊"
     },
     indicatorDots: true,
     autoplay:true,
     interval:1500,
     duration:700
   },
+  buyCommodity(){
+    wx.request({
+      url: wrapper.WCONST.apiBase + "buyCommodity.php",
+      data: {
+        openid: wx.getStorageSync('openid'),
+        No: this.data.commodity.cNo
+      },
+      method: "POST",
+      header: {
+        "content-type": "application/x-www-form-urlencoded"
+      },
+      success: res => {
+        console.log(res)
+        if (res.data) {
+          wx.showToast({
+            title: '购买成功',
+            icon: 'none',
+            mask: true,
+            duration: 2000,
+            success: () => {
+              setTimeout(() => {
+                wx.navigateBack();
+              }, 1000)
+            }
+          });
+          }
+        }
+      
+    })
+  },
+  contact(){
+    wx.navigateTo({
+      url: '/pages/contact/contact',
+    })
+  },
 
   onLoad: function (options) {
-  wrapper.request({
-    url: "",
+  wx.request({
+    url: wrapper.WCONST.apiBase+"getCommodityDetail.php",
     data: {
       openid: wx.getStorageSync('openid'),
-      cid:options.CId
+      No:options.No
     },
-    method: "GET",
+    method: "POST",
     header: {
       "content-type": "application/x-www-form-urlencoded"
     },
     success: res => {
-      if (res.data.status) {
+      console.log(res.data)
+      if (res.data.status!=20001) {
         this.setData({
       commodity:res.data
         })
