@@ -101,12 +101,26 @@ Page({
     });
     let that = this;
     // formData:{key:currentValue.hash,}  v:1.0
+    let title = that.data.title;
+    let intro = that.data.intro;
+    let master = that.data.master;
+    let cla = that.data.classIndex + 1;
+    let place = that.data.place;
+    let price = that.data.price;
+    let num = that.data.numberChoices;
+
     let uploadTask = wx.uploadFile({
       url: 'https://www.bupt404.cn/secmarket/testfile.php',
       filePath: currentValue.path,
       name: 'file',
       formData: {
-        openid: wx.getStorageSync('openid')
+        openid: wx.getStorageSync('openid'),
+        title: title,
+        classification: cla,
+        price: price,
+        place: place,
+        intro: intro,
+        amount: num,
       },
       success: function (res) {
         // that.setData({
@@ -212,6 +226,7 @@ Page({
     console.log("正在上传")         //上传主函数
     let that = this;
     //let masterUploadID = null;
+    /*
     let title = that.data.title;
     let intro = that.data.intro;
     let master = that.data.master;
@@ -219,6 +234,12 @@ Page({
     let place = that.data.place;
     let price = that.data.price;
     let num = that.data.numberChoices;
+    title: title,
+      classification: cla,
+        price: price,
+          place: place,
+            intro: intro,
+              amount: num,
     wx.request({
       url: "https://www.bupt404.cn/secmarket/testfile.php",
       data: {
@@ -253,7 +274,7 @@ Page({
           });
         }
       }
-    })
+    })*/
     this.data.file.forEach(function (currentValue, index, array) {  //循环函数
       that.uploadImg(currentValue, (data) => {
         let dataRaw = null;
